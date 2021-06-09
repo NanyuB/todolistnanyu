@@ -1,0 +1,61 @@
+<div class="contenedor">
+  <img
+    src="https://i.postimg.cc/SsG8cH48/kisspng-rabbit-easter-bunny-desktop-wallpaper-clip-art-soft-btsoftbott-bunny-bunnies-cute-sticker-fr.png"
+    alt="ToDolist"
+  />
+  <header>
+    <h1>Tareas de <br>Nat & Conchi</h1>
+    <input
+      autofocus
+      class="newToDo"
+      placeholder="Nueva tarea"
+      (keyup.Enter)="anadir()"
+      [(ngModel)]="nuevatarea"
+    />
+  </header>
+  <div class="columnas">
+    <ul class="lista">
+      <li class="tarea swtich-container" *ngFor="let tarea of tareas" [class.incompleta]="tarea.completa == false">
+        <input type="checkbox" id="switch" />
+        <label for="switch" class="lbl"(click)="completarTarea(tarea)"></label>
+        <span>{{tarea.titulo}}</span>
+        <button class="borrar" (click)="borrar(tarea)">×</button>
+      </li>
+    </ul>
+    <ul class="listacompleta">
+      <li class="tarea swtich-container" *ngFor="let tareacomp of tareaCompleta"
+        [class.completa]="tareacomp.completa == true">
+        <input type="checkbox" id="switch" checked="true"  />
+        <label for="switch" class="lbl"(click)="descompletarTarea(tareacomp)"></label>
+        <span>{{tareacomp.titulo}}</span>
+        <button class="borrar" (click)="borrarCompletadas(tareacomp)">×</button>
+      </li>
+    </ul>
+  </div>
+<div class=counters>
+  <div class="lista">
+    <div class="counter" *ngIf="tareas.length > 1  ">
+      {{tareas.length}} Tareas pendientes
+    </div>
+    <div class="counter" *ngIf="tareas.length === 1  ">
+      {{tareas.length}} Tarea pendiente
+    </div>
+  </div>
+  <div class="listacompleta">
+    <div class="counter" *ngIf="tareaCompleta.length > 1 ">
+      {{tareaCompleta.length}} Tareas completadas
+    </div>
+    <div class="counter" *ngIf="tareaCompleta.length === 1 ">
+      {{tareaCompleta.length}} Tarea completada
+    </div>
+  </div>
+</div>
+<div class="contenedorBotones">
+  <div class="botonCompletar">
+    <button *ngIf="tareas.length > 1" (click)="completarTodas()">Completar todas</button>
+  </div>
+  <div class="botonBorrar">
+    <button *ngIf="tareas.length > 1 || tareaCompleta.length >1 || (tareas.length && tareaCompleta.length)" (click)="borrarTodo()">Borrar todas</button>
+  </div>
+</div>
+</div>
